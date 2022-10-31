@@ -1,9 +1,13 @@
 <?php
 require_once 'connection.php';
 
-$query = $_GET['q'];
+if (isset($_GET['q'])) {
+    $query = $_GET['q'];
 
-$tsql = "SELECT * FROM menu_makanan WHERE nama LIKE '%$query%'";
+    $tsql = "SELECT * FROM menu_makanan WHERE nama LIKE '%$query%'";
+} else {
+    $tsql = "SELECT * FROM menu_makanan";
+}
 
 $stmt = sqlsrv_query($conn, $tsql);
 
