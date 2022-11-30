@@ -6,7 +6,7 @@ $json = file_get_contents('php://input');
 $data = json_decode($json);
 
 if ($data->filename && $data->tmpfile) {
-    $tsql = "SELECT * FROM menu_makanan WHERE nama = '$data->nama'";
+    $tsql = "SELECT * FROM menu_makanan WHERE kategori_menu = '$data->kategori_menu'";
     $stmt = sqlsrv_query($conn, $tsql);
     $result = null;
     while ($row = sqlsrv_fetch_object($stmt)) {
@@ -14,13 +14,13 @@ if ($data->filename && $data->tmpfile) {
     }
 
     if ($result) {
-        // nama menu telah digunakan
+        // kategori menu telah digunakan
         $response = array(
             'status' => 0,
-            'message' => 'Menu telah tersedia',
+            'message' => 'Kategori telah tersedia',
         );
     } else {
-        // nama menu belum digunakan
+        // kategori menu belum digunakan
         $filename = $data->filename . '.' . $data->file_ext;
         $tmp_file = $data->tmpfile;
 
